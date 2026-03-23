@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Pdfquest.Data;
+using Pdfquest.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,14 +9,20 @@ using System.Threading.Tasks;
 namespace Pdfquest.Repositories
 {
     public class StudentRepository : IStudentRepository
-{
-    public IEnumerable<Student> GetAll()
     {
-        return new List<Student>
+        private readonly StudentsDataContext _Context;
+
+
+
+        public StudentRepository(StudentsDataContext context)
         {
-            new Student { Id = 1, FullName = "Kevin" },
-            new Student { Id = 2, FullName = "Jose" }
-        };
+            _Context = context;
+        }
+        public List<Estudiantes> GetAll()
+        {
+            return _Context.Estudiantes.ToList();
+
+        }
+
     }
-}
 }
